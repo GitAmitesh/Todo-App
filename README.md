@@ -24,11 +24,11 @@ This is a simple yet powerful Todo List application built with React and styled 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/todo-list-app.git
+   git clone https://github.com/GitAmitesh/Todo-App.git
 
 2. Navigate to the project directory:
    ```bash
-   cd todo-list-app
+   cd Todo-App
 
 3. Install dependencies:
    ```bash

@@ -12,10 +12,11 @@ export const TodoProvider = (props) => {
     const [todo, setTodo] = useState("");
     const [todos, setTodos] = useState(getLocalItems());
     const [showFinished, setshowFinished] = useState(false);
+    const [editId, setEditId] = useState(null);
 
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos));
-      }, [todos]);
+    }, [todos]);
     
     
     const toggleFinished = () => {
@@ -23,9 +24,9 @@ export const TodoProvider = (props) => {
     }
       
     const handleEdit = (e, id) => {
-        let todo = todos.filter(item => item.id === id);
-        setTodo(todo[0].todo);
-        handleDelete(e,id);
+        const todoItem = todos.find(item => item.id === id);
+        setTodo(todoItem.todo);
+        setEditId(id);
     }
     
     const handleDelete = (e, id) => {
@@ -41,10 +42,18 @@ export const TodoProvider = (props) => {
     
     const handleAdd = (e) => {
         e.preventDefault();
-        const newTodo = { id: uuidv4(), todo, isCompleted: false };
-        const newTodos = [...todos,newTodo];
-        setTodos(newTodos);
-        setTodo("");
+        if (editId) {
+            // Update the existing todo
+            const updatedTodos = todos.map(item =>
+              item.id === editId ? { ...item, todo } : item
+            );
+            setTodos(updatedTodos);
+            setTodo("");
+            setEditId(null); // Reset editId after updating
+        }else{
+            setTodos([...todos, {id: uuidv4(), todo, isCompleted: false}]);
+            setTodo("");
+        }
     }
     
     const handleCheckbox = (e) => {
