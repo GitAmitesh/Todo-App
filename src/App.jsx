@@ -5,6 +5,7 @@ import { TodoContext } from './context/TodoContext'
 import TodoList from './components/TodoList'
 
 function App() {
+  // Destructuring values from TodoContext
   const {
     showFinished, toggleFinished
   } = useContext(TodoContext);
@@ -12,6 +13,7 @@ function App() {
 
   return (
     <>
+      {/* Render the navigation bar component */}
       <Navbar/>
 
       <div className="md:container mx-3 md:mx-auto my-5 rounded-xl p-5 bg-[#93B1A6] min-h-96 md:w-1/2">
@@ -23,7 +25,10 @@ function App() {
 
           {/* VIEWING AND MANAGING TODOS */}
           <h1 className='text-lg font-bold'>Your Tasks</h1>
-          <input onChange={toggleFinished} type="checkbox" checked={showFinished} /> <span className='text-base font-semibold'>Show Completed Tasks</span>
+          <input onChange={toggleFinished} type="checkbox" checked={showFinished} /> 
+          <span className='text-base font-semibold'> Show Completed Tasks</span>
+
+          {/*Render list of todos*/}
           <TodoList/>
           
       </div>
